@@ -3,6 +3,9 @@ import styles from "./style.module.css";
 
 export const ImgList = ({ list }) => {
   return list.map((el) => (
-    <img src={el.url} className={styles.gridTable_item} key={el.id} />
+    <div  style={{width: '200px'}}>
+    <img src={el.image} className={styles.gridTable_item} key={el.id} />
+    <div> {el.text}</div>
+    </div>
   ));
 };

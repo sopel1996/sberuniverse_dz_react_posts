@@ -6,8 +6,8 @@ class Api {
         this._token = token;
     }
 
-    getProducts() {
-        return fetch(`${this._url}/products`, {
+    getPosts() {
+        return fetch(`${this._url}/posts`, {
             headers: {
                 authorization: `Bearer ${this._token}`,
             },
