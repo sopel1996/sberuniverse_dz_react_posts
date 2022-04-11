@@ -1,8 +1,7 @@
 .gridTable {
-  /* max-width: 1150px; */
   margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: center;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  grid-template-rows: repeat(4, 1fr);
+  gap: 30px;
 }

@@ -1,59 +1,42 @@
 import { useEffect, useState } from "react";
-import api from "../../utils/api";
-import { ImgList } from "../ImgList";
+import { PostList } from "../PostList";
 import styles from "./style.module.css";
+import { POSTSONPAGE } from "../../utils/config";
 
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import Pagination from "@mui/material/Pagination";
 
-export const GridTable = () => {
-  const [postsState, setPostsState] = useState([]);
-  const [postsCnt, setPostsCnt] = useState(0);
-  var postsOnPage = 10;
+export const GridTable = ({ list, setPostsState, pagesCnt }) => {
+  const [page, setPage] = useState(1);
+
   useEffect(() => {
-    api.getPosts()
-    .then((response)=>{
-      if (response.ok){
-        return response.json();
-      } else {
-        throw response.status
-      }
-    })
-    .then((data)=>{
-      setPostsState((prevState)=>{
-      localStorage.setItem('beginState', JSON.stringify(data))
-        return [...prevState, ...data]
-      })
-    })
-    .catch((err)=>{
-      alert(err)
-    })
-      // .then((response) => response.json())
-      // .then((result) => {
-      //   setpostsState((prevState) => {
-      //     return [...prevState, ...result];
-      //   });
-      // });
-  }, []);
+    sliceList(page);
+  }, [page]);
 
-  useEffect(()=>{
-    setPostsCnt(postsState.length)
-
-  },[postsState])
-
-
-  const sliceList = ()=>{
-    // console.log(postsState);
-    // console.log(JSON.parse(localStorage.getItem('beginState')));
-    const slicedList = JSON.parse(localStorage.getItem('beginState')).slice(1,10);
+  const sliceList = (el) => {
+    var slicedList = 0;
+    if (localStorage.getItem("beginState")) {
+      slicedList = JSON.parse(localStorage.getItem("beginState")).slice(
+        POSTSONPAGE * (el - 1),
+        POSTSONPAGE * el
+      );
+    } else {
+      slicedList = list.slice(POSTSONPAGE * (el - 1), POSTSONPAGE * el);
+    }
     setPostsState(slicedList);
-  }
+  };
 
   return (
-    <div className={styles.gridTable}>
-      <button onClick={()=>{console.log(postsCnt)}}>количество постов</button>
-      <ImgList list={postsState} />
-      <Pagination count={10} variant="outlined" 
-      onChange={sliceList}/>
-    </div>)
+    <div>
+      <div className={styles.gridTable}>
+        <PostList list={list.slice(0,POSTSONPAGE)} />
+      </div>
+      <Pagination
+        count={pagesCnt}
+        variant="outlined"
+        onChange={(event, value) => {
+          setPage(value);
+        }}
+      />
+    </div>
+  );
 };
