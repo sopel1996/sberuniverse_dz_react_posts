@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { PostList } from "../PostList";
+import { Card } from "../Card";
 import styles from "./style.module.css";
 import { POSTSONPAGE } from "../../utils/config";
+import cn from 'classnames';
+import { Pagination } from "../Pagination";
 
-import Pagination from "@mui/material/Pagination";
-
-export const GridTable = ({ list, setPostsState, pagesCnt }) => {
+export const CardList = ({ list, setPostsState, pagesCnt }) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -26,17 +26,11 @@ export const GridTable = ({ list, setPostsState, pagesCnt }) => {
   };
 
   return (
-    <div>
-      <div className={styles.gridTable}>
-        <PostList list={list.slice(0,POSTSONPAGE)} />
-      </div>
-      <Pagination
-        count={pagesCnt}
-        variant="outlined"
-        onChange={(event, value) => {
-          setPage(value);
-        }}
-      />
-    </div>
+      <div className={cn('sectionInner', styles.cardListContainer)}>
+        <div className={cn(styles.gridTable)}>
+          <Card list={list.slice(0,POSTSONPAGE)} />
+        </div>
+        <Pagination pagesCnt={pagesCnt} setPage={setPage}/>
+        </div>
   );
 };

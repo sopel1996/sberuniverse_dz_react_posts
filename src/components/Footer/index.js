@@ -1,7 +1,14 @@
-import React from 'react'
+import React from "react";
+import style from "./style.module.css";
 
-export const Footer = () => {
+import cn from "classnames";
+
+export const Footer = ({children}) => {
   return (
-    <div>Footer</div>
+    <div className={style.footerContainer}>
+            <div className={cn(style.sectionInner, 'sectionInner')}>
+                    {children}
+            </div>
+        </div>
   )
-}
+};
