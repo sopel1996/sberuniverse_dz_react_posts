@@ -29,7 +29,13 @@ export const CardList = ({ list, setPostsState, pagesCnt, login }) => {
     return (
       <div className={cn('sectionInner', styles.cardListContainer)}>
         <div className={cn(styles.gridTable)}>
-          <Card list={list.slice(0,POSTSONPAGE)} />
+          {/* <Card list={list.slice(0,POSTSONPAGE)} /> */}
+          
+          {
+            list?.slice(0,POSTSONPAGE).map((item) => (
+              <Card post={item} key={item._id}/>
+            ))  
+          }
         </div>
         <Pagination pagesCnt={pagesCnt} setPage={setPage}/>
         </div>

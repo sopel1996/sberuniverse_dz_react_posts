@@ -18,13 +18,14 @@ import "./style.css";
 import { Timeline } from '../Timeline';
 
 
+export const Card = ({ post }) => {
 const toggleLike = ()=>{
-  console.log('Toggle Like');
+  console.log(post);
 }
 
-export const Card = ({ list }) => {
   require('dayjs/locale/ru');
-  return list.map((el) => (
+  // return list.map((post) => (
+  return (
     <CardMUI sx={{ maxWidth: 345 }} key={uuidv4()}>
       <CardHeader
         avatar={
@@ -37,22 +38,22 @@ export const Card = ({ list }) => {
             <MoreVertIcon />
           </IconButton>
         }
-        title={el.title}
-        subheader={dayjs(el.created_at).locale('ru').format('DD MMMM YYYY')}
+        title={post.title}
+        subheader={dayjs(post.created_at).locale('ru').format('DD MMMM YYYY')}
       />
       <CardMedia
         component="img"
         height="200"
-        image={el.image}
-        alt= {`${el.title} image`}
+        image={post.image}
+        alt= {`${post.title} image`}
       />
       <CardContent>
         <Typography variant="body2" color="text.secondary" noWrap>
-          {el.text}
+          {post.text}
         </Typography>
         <Typography>
           Tags:
-          {el.tags.map(el=>{
+          {post.tags.map(el=>{
             return (
               <Button variant="outlined" size="small" sx={{ml: '10px'}} key={uuidv4()}>{el}
               </Button>
@@ -60,13 +61,13 @@ export const Card = ({ list }) => {
           })}
         </Typography>
       </CardContent>
-      <Timeline createdAt={dayjs(el.created_at).locale('ru').format('DD-MM-YYYY')} updatedAt={dayjs(el.updated_at).locale('ru').format('DD-MM-YYYY')}/>
+      <Timeline createdAt={dayjs(post.created_at).locale('ru').format('DD-MM-YYYY')} updatedAt={dayjs(post.updated_at).locale('ru').format('DD-MM-YYYY')}/>
       <CardActions disableSpacing>
         <IconButton aria-label="add to favorites" onClick={toggleLike}>
           <FavoriteIcon />
         </IconButton>
-          <Typography>{el.likes.length}</Typography>
+          <Typography>{post.likes.length}</Typography>
       </CardActions>
     </CardMUI>
-  ));
+  )
 };
