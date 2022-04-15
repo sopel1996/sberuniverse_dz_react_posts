@@ -18,7 +18,9 @@ import "./style.css";
 import { Timeline } from '../Timeline';
 
 
-
+const toggleLike = ()=>{
+  console.log('Toggle Like');
+}
 
 export const Card = ({ list }) => {
   require('dayjs/locale/ru');
@@ -60,10 +62,10 @@ export const Card = ({ list }) => {
       </CardContent>
       <Timeline createdAt={dayjs(el.created_at).locale('ru').format('DD-MM-YYYY')} updatedAt={dayjs(el.updated_at).locale('ru').format('DD-MM-YYYY')}/>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites">
+        <IconButton aria-label="add to favorites" onClick={toggleLike}>
           <FavoriteIcon />
         </IconButton>
-
+          <Typography>{el.likes.length}</Typography>
       </CardActions>
     </CardMUI>
   ));

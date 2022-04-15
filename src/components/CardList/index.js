@@ -5,7 +5,7 @@ import { POSTSONPAGE } from "../../utils/config";
 import cn from 'classnames';
 import { Pagination } from "../Pagination";
 
-export const CardList = ({ list, setPostsState, pagesCnt }) => {
+export const CardList = ({ list, setPostsState, pagesCnt, login }) => {
   const [page, setPage] = useState(1);
 
   useEffect(() => {
@@ -25,7 +25,8 @@ export const CardList = ({ list, setPostsState, pagesCnt }) => {
     setPostsState(slicedList);
   };
 
-  return (
+  if (login){
+    return (
       <div className={cn('sectionInner', styles.cardListContainer)}>
         <div className={cn(styles.gridTable)}>
           <Card list={list.slice(0,POSTSONPAGE)} />
@@ -33,4 +34,5 @@ export const CardList = ({ list, setPostsState, pagesCnt }) => {
         <Pagination pagesCnt={pagesCnt} setPage={setPage}/>
         </div>
   );
+}else {return null}
 };

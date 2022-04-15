@@ -4,11 +4,15 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import style from './style.module.css';
 import cn from 'classnames';
+import { Modal } from '../Modal';
 const clickHandler = ()=>{
     console.log('Click on NewPostBtn');
 }
 
 export const HeaderLine = () => {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   return (
     <div className={style.headerLine}>
     <div className={cn(style.sectionInner, 'sectionInner')}>
@@ -17,8 +21,10 @@ export const HeaderLine = () => {
         Тут будет заголовок
     </Typography>    
         
-      <Button variant="contained" onClick={clickHandler}>Новый пост</Button>
+      <Button variant="contained" onClick={handleOpen}>Новый пост</Button>
+
     </div>
+      <Modal open={open} handleOpen={handleOpen} handleClose={handleClose}/>
 
     </div>
   )
