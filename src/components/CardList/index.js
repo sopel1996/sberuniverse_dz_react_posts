@@ -4,6 +4,7 @@ import styles from "./style.module.css";
 import { POSTSONPAGE } from "../../utils/config";
 import cn from 'classnames';
 import { Pagination } from "../Pagination";
+import { Typography } from "@mui/material";
 
 export const CardList = ({ list, setPostsState, pagesCnt, login, favorite, setFavorite }) => {
   const [page, setPage] = useState(1);
@@ -41,5 +42,9 @@ export const CardList = ({ list, setPostsState, pagesCnt, login, favorite, setFa
         <Pagination pagesCnt={pagesCnt} setPage={setPage}/>
         </div>
   );
-}else {return null}
+}else {return (
+  <Typography>Авторизируйтесь (кнопка сверху справа)
+    PS: авторизация пока фейковая
+  </Typography>
+)}
 };
