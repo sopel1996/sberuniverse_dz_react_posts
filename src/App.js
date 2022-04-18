@@ -17,19 +17,18 @@ const [postsState, setPostsState] = useState([]);
 const [pagesCnt, setPagesCnt] = useState(1);
 const [login, setLogin] = useState(false);
 const [user, setUser] = useState(null);
+const [favorite, setFavorite] = useState([]);
 
 useEffect(() => {
   if (login){
 
     api.getPosts()
-    .then((response)=>{
-      if (response.ok){
-        return response.json();
-      } else {
-        throw response.status
-      }
-    })
     .then((data)=>{
+      data.forEach((el)=>{
+        if (el.likes.includes(localStorage.getItem('userID'))){
+          setFavorite((prevState)=>[...prevState, el._id])
+        }
+     })
       localStorage.setItem('beginState', JSON.stringify(data))
       setPostsState((prevState)=>{
         setPagesCnt(Math.ceil(data.length/POSTSONPAGE));
@@ -50,13 +49,6 @@ useEffect(() => {
 useEffect(() => {
   if (login){
     api.getMeInfo()
-    .then((response)=>{
-      if (response.ok){
-        return response.json();
-      } else {
-        throw response.status
-      }
-    })
     .then((data)=>{
       setUser(data)
     })
@@ -64,7 +56,9 @@ useEffect(() => {
       alert(err)
     })
   }
-},[login])
+},[login]);
+
+
 
   return (
     <div className='appContainer'>
@@ -74,7 +68,7 @@ useEffect(() => {
     </Header>
     <Breadcrumbs />
     <HeaderLine />
-    <CardList list={postsState} setPostsState={setPostsState} pagesCnt={pagesCnt} setPagesCnt={setPagesCnt} login={login}/>
+    <CardList list={postsState} setPostsState={setPostsState} pagesCnt={pagesCnt} setPagesCnt={setPagesCnt} login={login} favorite={favorite} setFavorite={setFavorite}/>
     <Footer>
       <Logo />
 

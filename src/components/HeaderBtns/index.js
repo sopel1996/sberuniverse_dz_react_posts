@@ -28,6 +28,9 @@ export default function HeaderBtns ({isLogin,setLogin,name}) {
     localStorage.setItem(
       'token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjRmMjY2YWFlMTlmNTQ2ZGMwODNhNTEiLCJpYXQiOjE2NDkzNTQzNTUsImV4cCI6MTY4MDg5MDM1NX0.bo6XNJROxKiRXGpyEl527oKcQQFw2Q6SzRlb9nNsiiY',
       );
+    localStorage.setItem(
+      'userID', '624f266aae19f546dc083a51',
+      );
       setLogin(true);
     };
     

@@ -1,5 +1,8 @@
 import { config } from './config';
 
+const onResponce = (res) => {
+    return res.ok ? res.json() : Promise.reject(`Ошибка : ${res.status}`);
+};
 class Api {
     constructor({ url, token }) {
         this._url = url;
@@ -11,7 +14,7 @@ class Api {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        })
+        }).then(onResponce);
     }
 
     getMeInfo() {
@@ -19,7 +22,7 @@ class Api {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`,
             },
-        })
+        }).then(onResponce);
     }
 
     updateUserInfo() {
@@ -35,6 +38,39 @@ class Api {
         })
         });
     }
+
+    addLike(itemID) {
+        return fetch(`${this._url}/posts/likes/${itemID}`, {
+            method: 'PUT',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        }).then(onResponce);
+    }
+    
+    removeLike(itemID) {
+        return fetch(`${this._url}/posts/likes/${itemID}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        }).then(onResponce);
+    }
+
+    // getMyFavorite(userID) {
+    //     let myFavorite = [];
+       
+    //     this.getPosts().then((data)=>{
+    //        data.forEach((el)=>{
+    //            console.log(el);
+    //            if (el.likes.includes(userID)){
+    //             myFavorite.push(el._id)
+    //            }
+    //         })
+    //         return myFavorite;
+    //     })
+    // }
+
 }
 
 export default new Api(config);

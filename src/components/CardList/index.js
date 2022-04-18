@@ -5,13 +5,13 @@ import { POSTSONPAGE } from "../../utils/config";
 import cn from 'classnames';
 import { Pagination } from "../Pagination";
 
-export const CardList = ({ list, setPostsState, pagesCnt, login }) => {
+export const CardList = ({ list, setPostsState, pagesCnt, login, favorite, setFavorite }) => {
   const [page, setPage] = useState(1);
-
   useEffect(() => {
     sliceList(page);
   }, [page]);
 
+  
   const sliceList = (el) => {
     var slicedList = 0;
     if (localStorage.getItem("beginState")) {
@@ -33,7 +33,8 @@ export const CardList = ({ list, setPostsState, pagesCnt, login }) => {
           
           {
             list?.slice(0,POSTSONPAGE).map((item) => (
-              <Card post={item} key={item._id}/>
+              <Card post={item} key={item._id} isInFavorite={favorite.includes(item._id)} setFavorite={setFavorite} />
+              // <Card post={item} key={item._id} isInFavorite={item.likes.includes(userID)} setFavorite={setFavorite} like={item.likes.includes(userID)}/>
             ))  
           }
         </div>
