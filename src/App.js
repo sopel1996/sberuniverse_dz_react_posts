@@ -16,6 +16,7 @@ function App() {
 const [postsState, setPostsState] = useState([]);
 const [pagesCnt, setPagesCnt] = useState(1);
 const [login, setLogin] = useState(false);
+const [updateAfterDelete, setUpdateAfterDelete] = useState(false);
 const [user, setUser] = useState(null);
 const [favorite, setFavorite] = useState([]);
 
@@ -32,6 +33,7 @@ useEffect(() => {
       localStorage.setItem('beginState', JSON.stringify(data))
       setPostsState((prevState)=>{
         setPagesCnt(Math.ceil(data.length/POSTSONPAGE));
+        setUpdateAfterDelete(false);
         return [...prevState, ...data]
       })
     })
@@ -45,7 +47,7 @@ useEffect(() => {
         return []
       })
 }
-}, [login]);
+}, [login, updateAfterDelete]);
 useEffect(() => {
   if (login){
     api.getMeInfo()
@@ -68,7 +70,7 @@ useEffect(() => {
     </Header>
     <Breadcrumbs />
     <HeaderLine />
-    <CardList list={postsState} setPostsState={setPostsState} pagesCnt={pagesCnt} setPagesCnt={setPagesCnt} login={login} favorite={favorite} setFavorite={setFavorite}/>
+    <CardList list={postsState} setPostsState={setPostsState} pagesCnt={pagesCnt} setPagesCnt={setPagesCnt} login={login} favorite={favorite} setFavorite={setFavorite} user={user} setUpdateAfterDelete={setUpdateAfterDelete}/>
     <Footer>
       <Logo />
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import {Pagination as PaginationMUI} from "@mui/material";
 
-export const Pagination = ({pagesCnt, setPage}) => {
+export const Pagination = ({pagesCnt, setPage, page}) => {
   return (
     <PaginationMUI
         count={pagesCnt}
@@ -9,6 +9,7 @@ export const Pagination = ({pagesCnt, setPage}) => {
         onChange={(event, value) => {
           setPage(value);
         }}
+        page={page}
         />
   )
 }

@@ -57,6 +57,15 @@ class Api {
         }).then(onResponce);
     }
 
+    deletePost(postID){
+        return fetch(`${this._url}/posts/${postID}`, {
+            method: 'DELETE',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        })
+    }
+
     // getMyFavorite(userID) {
     //     let myFavorite = [];
        

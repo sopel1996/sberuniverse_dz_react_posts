@@ -17,9 +17,10 @@ import { v4 as uuidv4 } from 'uuid';
 import "./style.css";
 import { Timeline } from '../Timeline';
 import api from '../../utils/api.js'
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 
-export const Card = ({ post, isInFavorite, setFavorite }) => {
+export const Card = ({ post, isInFavorite, setFavorite, user, setUpdateAfterDelete, setPage }) => {
 
   const [likeCount, setLikeCount] = useState(post.likes.length)
 
@@ -57,6 +58,23 @@ export const Card = ({ post, isInFavorite, setFavorite }) => {
           alert(`Не удалось удалить из избранного`)
       })     
   }
+  
+  const deletePost = ()=>{
+    if(user._id ===  post.author._id){
+      api.deletePost(post._id)
+      .then((res)=>{
+        if (res.ok){
+          alert('пост удален');
+          setPage(1);
+          return setUpdateAfterDelete(true);
+        }else{
+          return Promise.reject(`Ошибка : ${res.status}`)
+        }
+      })
+    }else{
+      alert('Вы не автор этого поста. Удаление невозвожно!')
+    }
+  }
 
   require('dayjs/locale/ru');
   // return list.map((post) => (
@@ -69,8 +87,8 @@ export const Card = ({ post, isInFavorite, setFavorite }) => {
           </Avatar>
         }
         action={
-          <IconButton aria-label="settings">
-            <MoreVertIcon />
+          <IconButton aria-label="settings" onClick={deletePost}>
+            <DeleteForeverIcon />
           </IconButton>
         }
         title={post.title}
