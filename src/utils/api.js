@@ -16,6 +16,14 @@ class Api {
             },
         }).then(onResponce);
     }
+    getPostsOnPage(pageNumber, postsOnPage) {
+        return fetch(`${this._url}/posts/paginate?page=${pageNumber}&limit=${postsOnPage}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        }).then(onResponce);
+
+    }
 
     getMeInfo() {
         return fetch(`${this._url}/users/me`, {

@@ -20,34 +20,34 @@ const [updateAfterDelete, setUpdateAfterDelete] = useState(false);
 const [user, setUser] = useState(null);
 const [favorite, setFavorite] = useState([]);
 
-useEffect(() => {
-  if (login){
+// useEffect(() => {
+//   if (login){
 
-    api.getPosts()
-    .then((data)=>{
-      data.forEach((el)=>{
-        if (el.likes.includes(localStorage.getItem('userID'))){
-          setFavorite((prevState)=>[...prevState, el._id])
-        }
-     })
-      localStorage.setItem('beginState', JSON.stringify(data))
-      setPostsState((prevState)=>{
-        setPagesCnt(Math.ceil(data.length/POSTSONPAGE));
-        setUpdateAfterDelete(false);
-        return [...prevState, ...data]
-      })
-    })
-    .catch((err)=>{
-    alert(err)
-  })
-}else{
-  localStorage.setItem('beginState','')
-      setPostsState(()=>{
-        setPagesCnt(0);
-        return []
-      })
-}
-}, [login, updateAfterDelete]);
+//     api.getPosts()
+//     .then((data)=>{
+//       data.forEach((el)=>{
+//         if (el.likes.includes(localStorage.getItem('userID'))){
+//           setFavorite((prevState)=>[...prevState, el._id])
+//         }
+//      })
+//       localStorage.setItem('beginState', JSON.stringify(data))
+//       setPostsState((prevState)=>{
+//         setPagesCnt(Math.ceil(data.length/POSTSONPAGE));
+//         setUpdateAfterDelete(false);
+//         return [...prevState, ...data]
+//       })
+//     })
+//     .catch((err)=>{
+//     alert(err)
+//   })
+// }else{
+//   localStorage.setItem('beginState','')
+//       setPostsState(()=>{
+//         setPagesCnt(0);
+//         return []
+//       })
+// }
+// }, [login, updateAfterDelete]);
 useEffect(() => {
   if (login){
     api.getMeInfo()
@@ -66,7 +66,7 @@ useEffect(() => {
     <div className='appContainer'>
     <Header>
     <Logo />
-    <HeaderBtns isLogin={login} setLogin={setLogin} name={user?.name}/>
+    <HeaderBtns isLogin={login} setLogin={setLogin} user={user}/>
     </Header>
     <Breadcrumbs />
     <HeaderLine />
