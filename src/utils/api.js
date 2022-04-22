@@ -9,8 +9,9 @@ class Api {
         // this._token = token;
     }
 
-    getPosts() {
-        return fetch(`${this._url}/posts`, {
+    getPosts(itemID) {
+        const requestUrl = itemID ? `${this._url}/posts/${itemID}` : `${this._url}/posts`;
+        return fetch(requestUrl, {
             headers: {
                 authorization: `Bearer ${localStorage.getItem('token')}`,
             },

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Breadcrumbs as BreadcrumbsMUI} from '@mui/material';
-import Link from '@mui/material/Link';
+import { Routes, Route, Link } from 'react-router-dom';
 import styles from "./style.module.css";
 
 function handleClick(event) {
@@ -13,13 +13,10 @@ export const Breadcrumbs = () => {
         <div className={styles.breadcrumbsContainer} role="presentation" onClick={handleClick}>
         <div className='sectionInner'>
           <BreadcrumbsMUI aria-label="breadcrumb">
-            <Link underline="hover" color="inherit" href="/">
-              Home
-            </Link>
             <Link
               underline="hover"
               color="text.primary"
-              href="#"
+              to="/all_posts"
               aria-current="page"
             >
               All posts

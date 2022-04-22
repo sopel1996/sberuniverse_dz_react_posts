@@ -10,10 +10,10 @@ import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import { Link } from "@mui/material";
+import { Link as LinkRoute } from 'react-router-dom';
+
 import GitHubIcon from "@mui/icons-material/GitHub";
 import LoginIcon from "@mui/icons-material/Login";
-import api from "../../utils/api";
-import Typography from "@mui/material/Typography";
 
 export default function HeaderBtns({ isLogin, setLogin, user }) {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,9 +63,11 @@ export default function HeaderBtns({ isLogin, setLogin, user }) {
             </IconButton>
           </Tooltip>
         ) : (
+          <LinkRoute to={'all_posts'}>
           <IconButton aria-label="Login" onClick={loginFunc}>
             <LoginIcon />
           </IconButton>
+          </LinkRoute>
         )}
       </Box>
       <Menu
@@ -120,10 +122,12 @@ export default function HeaderBtns({ isLogin, setLogin, user }) {
           Settings
         </MenuItem>
         <MenuItem onClick={logoutFunc}>
+          <LinkRoute to={'/'}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>
           Logout
+          </LinkRoute>
         </MenuItem>
       </Menu>
     </React.Fragment>

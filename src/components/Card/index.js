@@ -6,11 +6,13 @@ import CardMedia from '@mui/material/CardMedia';
 import CardContent from '@mui/material/CardContent';
 import CardActions from '@mui/material/CardActions';
 import Avatar from '@mui/material/Avatar';
-import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import IconButton from '@mui/material/IconButton';
+
+import { Link } from 'react-router-dom';
+
 import Typography from '@mui/material/Typography';
 import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import MoreVertIcon from '@mui/icons-material/MoreVert';
 import Button from '@mui/material/Button';
 import * as dayjs from 'dayjs'
 import { v4 as uuidv4 } from 'uuid';
@@ -77,21 +79,19 @@ export const Card = ({ post, isInFavorite, setFavorite, user, setUpdateAfterDele
   }
 
   require('dayjs/locale/ru');
-  // return list.map((post) => (
   return (
     <CardMUI sx={{ maxWidth: 345 }} key={uuidv4()}>
       <CardHeader
         avatar={
-          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-            R
-          </Avatar>
+          <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={post.author.avatar} />
         }
         action={
-          <IconButton aria-label="settings" onClick={deletePost}>
+          user._id ===  post.author._id ? 
+            <IconButton aria-label="settings" onClick={deletePost}>
             <DeleteForeverIcon />
-          </IconButton>
+            </IconButton> : null
         }
-        title={post.title}
+        title={<Link to={`/post/${post._id}`}>{post.title}</Link>} 
         subheader={dayjs(post.created_at).locale('ru').format('DD MMMM YYYY')}
       />
       <CardMedia

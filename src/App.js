@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
-import 'normalize.css';
-import "./App.css";
+import { Routes, Route, Link } from 'react-router-dom';
+
 import { Footer } from "./components/Footer";
-import { CardList } from "./components/CardList";
 import { Header } from "./components/Header";
 import Logo  from "./components/Logo";
-import api from "./utils/api";
-import { POSTSONPAGE } from "./utils/config";
-import { Breadcrumbs } from "./components/Breadcrumbs";
-import { HeaderLine } from "./components/HeaderLine";
 import HeaderBtns from "./components/HeaderBtns";
+import { LoginContent } from "./components/LoginContent";
+
+import api from "./utils/api";
+
+import 'normalize.css';
+import "./App.css";
+import { Typography } from "@mui/material";
+import { Item } from "./components/Item";
 
 function App() {
 
@@ -68,9 +71,22 @@ useEffect(() => {
     <Logo />
     <HeaderBtns isLogin={login} setLogin={setLogin} user={user}/>
     </Header>
-    <Breadcrumbs />
-    <HeaderLine />
-    <CardList list={postsState} setPostsState={setPostsState} pagesCnt={pagesCnt} setPagesCnt={setPagesCnt} login={login} favorite={favorite} setFavorite={setFavorite} user={user} setUpdateAfterDelete={setUpdateAfterDelete}/>
+    <Routes>
+      <Route
+      path='/'
+      element={
+          <div className='content__cards'>
+              <Typography>Авторизируйтесь (кнопка сверху справа)
+                PS: авторизация пока фейковая
+              </Typography>
+          </div>
+      } />
+      <Route path='/all_posts' element={
+        <LoginContent list={postsState} setPostsState={setPostsState} pagesCnt={pagesCnt} setPagesCnt={setPagesCnt} login={login} favorite={favorite} setFavorite={setFavorite} user={user} setUpdateAfterDelete={setUpdateAfterDelete}/>
+      }/>
+      <Route path='/post/:itemID' element={<Item />} />
+
+    </Routes>
     <Footer>
       <Logo />
 
