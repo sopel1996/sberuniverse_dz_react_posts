@@ -17,6 +17,16 @@ class Api {
             },
         }).then(onResponce);
     }
+    addPosts(post) {
+        return fetch(`${this._url}/posts`, {
+            method: 'POST',
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(post),
+        }).then(onResponce);
+    }
     getPostsOnPage(pageNumber, postsOnPage) {
         return fetch(`${this._url}/posts/paginate?page=${pageNumber}&limit=${postsOnPage}`, {
             headers: {
@@ -26,6 +36,13 @@ class Api {
 
     }
 
+    getUserInfo(userID) {
+        return fetch(`${this._url}/users/${userID}`, {
+            headers: {
+                authorization: `Bearer ${localStorage.getItem('token')}`,
+            },
+        }).then(onResponce);
+    }
     getMeInfo() {
         return fetch(`${this._url}/users/me`, {
             headers: {

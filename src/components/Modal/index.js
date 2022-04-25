@@ -3,6 +3,11 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import {Modal as ModalMUI} from '@mui/material';
+import Input from '@mui/material/Input';
+import { TextField, Grid} from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+import api from '../../utils/api';
 
 const style = {
   position: 'absolute',
@@ -15,9 +20,33 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+const ariaLabel = { 'aria-label': 'description' };
 
 export const Modal = ({open,handleOpen,handleClose}) => {
   
+  const navigate = useNavigate();
+  const handleSubmit = (event) => {
+      event.preventDefault();
+      const {
+          target: { inputName, inputText, inputImg, inputTags },
+      } = event;
+      let tmp = inputTags.value.split(',');
+      let tags = [];
+      tmp.forEach(el => {
+        tags.push(el.trim());
+      });
+      api.addPosts({
+        title: inputName.value, // name(ключ объекта) : name.value(обращение к value input из узла дома event target)
+        text: inputText.value,
+        image: inputImg.value,
+        tags: tags,
+      })
+          .then((data) => {
+              navigate('/all_posts');
+              handleClose();
+          })
+          .catch((err) => alert(err));
+  };
 
   return (
     <div>
@@ -28,13 +57,27 @@ export const Modal = ({open,handleOpen,handleClose}) => {
         aria-describedby="modal-modal-description"
         >
         <Box sx={style}>
-        <Button onClick={handleClose}>Close modal</Button>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <form onSubmit={handleSubmit}>
+              <Grid container flexDirection='column' spacing='10'>
+                  <Grid item>
+                      <TextField label='Название' name='inputName' variant='outlined' />
+                  </Grid>
+                  <Grid item>
+                      <TextField label='Описание товара' name='inputText' variant='outlined' />
+                  </Grid>
+                  <Grid item>
+                      <TextField label='Изображение' name='inputImg' variant='outlined' />
+                  </Grid>
+                  <Grid item>
+                      <TextField label='Теги' name='inputTags' variant='outlined' />
+                  </Grid>
+                  <Grid item>
+                      <Button type='submit' variant='contained' size='small'>
+                          Добавить товар
+                      </Button>
+                  </Grid>
+              </Grid>
+          </form>
         </Box>
       </ModalMUI>
     </div>

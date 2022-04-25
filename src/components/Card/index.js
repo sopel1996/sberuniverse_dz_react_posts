@@ -62,7 +62,7 @@ export const Card = ({ post, isInFavorite, setFavorite, user, setUpdateAfterDele
   }
   
   const deletePost = ()=>{
-    if(user._id ===  post.author._id){
+    if(user?._id ===  post?.author._id){
       api.deletePost(post._id)
       .then((res)=>{
         if (res.ok){
@@ -86,7 +86,7 @@ export const Card = ({ post, isInFavorite, setFavorite, user, setUpdateAfterDele
           <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe" src={post.author.avatar} />
         }
         action={
-          user._id ===  post.author._id ? 
+          user?._id ===  post?.author._id ? 
             <IconButton aria-label="settings" onClick={deletePost}>
             <DeleteForeverIcon />
             </IconButton> : null
