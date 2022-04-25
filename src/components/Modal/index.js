@@ -63,7 +63,7 @@ export const Modal = ({open,handleOpen,handleClose}) => {
                       <TextField label='Название' name='inputName' variant='outlined' />
                   </Grid>
                   <Grid item>
-                      <TextField label='Описание товара' name='inputText' variant='outlined' />
+                      <TextField label='Текст поста' name='inputText' variant='outlined' />
                   </Grid>
                   <Grid item>
                       <TextField label='Изображение' name='inputImg' variant='outlined' />
@@ -73,7 +73,7 @@ export const Modal = ({open,handleOpen,handleClose}) => {
                   </Grid>
                   <Grid item>
                       <Button type='submit' variant='contained' size='small'>
-                          Добавить товар
+                          Добавить пост
                       </Button>
                   </Grid>
               </Grid>
