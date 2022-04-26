@@ -22,7 +22,7 @@ const style = {
 };
 const ariaLabel = { 'aria-label': 'description' };
 
-export const Modal = ({open,handleOpen,handleClose}) => {
+export const Modal = ({open,handleOpen,handleClose,setPage,pagesCnt}) => {
   
   const navigate = useNavigate();
   const handleSubmit = (event) => {
@@ -46,6 +46,7 @@ export const Modal = ({open,handleOpen,handleClose}) => {
               handleClose();
           })
           .catch((err) => alert(err));
+      setPage(pagesCnt);    
   };
 
   return (

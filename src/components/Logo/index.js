@@ -1,12 +1,19 @@
 import React from "react";
+import { Routes, Route, Link } from 'react-router-dom';
 import "./index.css";
 import logo from "../../../public/assets/svg/NoLogo.svg";
 
-const Logo = ({className, href, ...props}) => {
+
+const Logo = ({isLogin, className, href, ...props}) => {
 	return (
-		<a href={href} className={className? className: "logo"} {...props}>
+		isLogin? 
+		<Link to='/all_posts' className={className? className: "logo"} {...props}>
 			<img src={logo} alt="logo" className="logo__pic"/>
-		</a>
+		</Link>
+		: 
+		<Link to='/' className={className? className: "logo"} {...props}>
+			<img src={logo} alt="logo" className="logo__pic"/>
+		</Link>
 	);
 };
 

@@ -1,27 +1,24 @@
-import { useEffect, useState } from "react";
 import { Card } from "../Card";
 import styles from "./style.module.css";
-import { POSTSONPAGE } from "../../utils/config";
 import cn from 'classnames';
 import { Pagination } from "../Pagination";
-import api from "../../utils/api";
 
-export const CardList = ({ list, setPostsState, pagesCnt, setPagesCnt, login, favorite, setFavorite, user, setUpdateAfterDelete,  }) => {
-  const [page, setPage] = useState(1);
-  useEffect(() => {
-    if (login){
-      sliceList(page);
-    }
-  }, [page, login]);
+export const CardList = ({ list, pagesCnt, favorite, setFavorite, user, setUpdateAfterDelete,  setPage, page}) => {
+  // const [page, setPage] = useState(1);
+  // useEffect(() => {
+  //   if (login){
+  //     sliceList(page);
+  //   }
+  // }, [page, login]);
 
-  const sliceList = (el) => {
-    api.getPostsOnPage(el, POSTSONPAGE).then((data)=>{
-      setPagesCnt(Math.ceil(data.total/POSTSONPAGE));
-      setPostsState(data.posts);
-    }
-    )
-    .catch((err)=>{alert(err)})
-  };
+  // const sliceList = (el) => {
+  //   api.getPostsOnPage(el, POSTSONPAGE).then((data)=>{
+  //     setPagesCnt(Math.ceil(data.total/POSTSONPAGE));
+  //     setPostsState(data.posts);
+  //   }
+  //   )
+  //   .catch((err)=>{alert(err)})
+  // };
 
     return (
       <div className={cn('sectionInner', styles.cardListContainer)}>

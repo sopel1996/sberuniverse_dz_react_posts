@@ -8,7 +8,7 @@ function handleClick(event) {
   console.info('You clicked a breadcrumb.');
 }
 
-export const Breadcrumbs = () => {
+export const Breadcrumbs = ({setPage}) => {
     return (
         <div className={styles.breadcrumbsContainer} role="presentation" onClick={handleClick}>
         <div className='sectionInner'>
@@ -18,6 +18,8 @@ export const Breadcrumbs = () => {
               color="text.primary"
               to="/all_posts"
               aria-current="page"
+              onClick={()=>{setPage(1)}
+            }
             >
               All posts
             </Link>

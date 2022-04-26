@@ -68,7 +68,7 @@ useEffect(() => {
   return (
     <div className='appContainer'>
     <Header>
-    <Logo />
+    <Logo isLogin={login}/>
     <HeaderBtns isLogin={login} setLogin={setLogin} user={user}/>
     </Header>
     <Routes>
@@ -84,7 +84,7 @@ useEffect(() => {
       <Route path='/all_posts' element={
         <LoginContent list={postsState} setPostsState={setPostsState} pagesCnt={pagesCnt} setPagesCnt={setPagesCnt} login={login} favorite={favorite} setFavorite={setFavorite} user={user} setUpdateAfterDelete={setUpdateAfterDelete}/>
       }/>
-      <Route path='/post/:itemID' element={<Item />} />
+      <Route path='/post/:itemID' element={<Item  />} />
 
     </Routes>
     <Footer>

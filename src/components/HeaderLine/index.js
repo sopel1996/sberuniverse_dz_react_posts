@@ -5,7 +5,7 @@ import style from './style.module.css';
 import cn from 'classnames';
 import { Modal } from '../Modal';
 
-export const HeaderLine = () => {
+export const HeaderLine = ({setPage,pagesCnt}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -20,7 +20,7 @@ export const HeaderLine = () => {
       <Button variant="contained" onClick={handleOpen}>Новый пост</Button>
 
     </div>
-      <Modal open={open} handleOpen={handleOpen} handleClose={handleClose}/>
+      <Modal open={open} handleOpen={handleOpen} handleClose={handleClose} setPage={setPage} pagesCnt={pagesCnt}/>
 
     </div>
   )

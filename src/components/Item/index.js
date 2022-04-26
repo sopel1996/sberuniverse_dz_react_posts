@@ -7,11 +7,12 @@ import { Button, Typography } from "@mui/material";
 import { Comments } from "../comments";
 
 import List from '@mui/material/List';
+import { HeaderLine } from "../HeaderLine";
 
 
 
 
-export const Item = () => {
+export const Item = ({setPage, pagesCnt}) => {
   const [item, setItem] = useState(null);
   const params = useParams();
   const navigate = useNavigate();
@@ -39,6 +40,9 @@ export const Item = () => {
   return (
     <div className="sectionInner">
       {item && (
+        <>
+        <HeaderLine setPage={setPage} pagesCnt={pagesCnt}/>
+
         <Grid container spacing={2}>
           <Grid item xs={6}>
             <Button
@@ -89,6 +93,8 @@ export const Item = () => {
 
             </Grid>
         </Grid>
+        </>
+
       )}
     </div>
   );
