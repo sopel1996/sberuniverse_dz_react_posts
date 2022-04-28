@@ -42,7 +42,7 @@ export const Item = ({setPage, pagesCnt}) => {
       {item && (
         <>
 
-        <HeaderLine setPage={setPage} pagesCnt={pagesCnt}/>
+        <HeaderLine setPage={setPage} pagesCnt={pagesCnt} title={item.title}/>
         <Grid container spacing={2}>
         {localStorage.getItem('userID')===item.author._id ?
         <>

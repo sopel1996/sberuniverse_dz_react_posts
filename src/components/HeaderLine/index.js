@@ -5,7 +5,7 @@ import style from './style.module.css';
 import cn from 'classnames';
 import { Modal } from '../Modal';
 
-export const HeaderLine = ({setPage,pagesCnt}) => {
+export const HeaderLine = ({setPage,pagesCnt,title}) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -14,7 +14,7 @@ export const HeaderLine = ({setPage,pagesCnt}) => {
     <div className={cn(style.sectionInner, 'sectionInner')}>
 
     <Typography variant="h3" component="h3">
-        Тут будет заголовок
+        {title?title:'Тут будет заголовок'}
     </Typography>    
         
       <Button variant="contained" onClick={handleOpen}>Новый пост</Button>
