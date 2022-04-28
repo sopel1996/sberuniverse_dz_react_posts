@@ -12,7 +12,7 @@ export const Comments = ({comment}) => {
     let [commentAuthor, setCommentAuthor] = useState();
     useEffect(()=>{
         api.getUserInfo(comment.author).
-        then((data)=>{console.log(data);setCommentAuthor(data)})
+        then((data)=>{setCommentAuthor(data)})
     },[])
   return (
       <>

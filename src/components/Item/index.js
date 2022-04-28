@@ -8,6 +8,7 @@ import { Comments } from "../comments";
 
 import List from '@mui/material/List';
 import { HeaderLine } from "../HeaderLine";
+import { Breadcrumbs } from "../Breadcrumbs";
 
 
 
@@ -19,16 +20,15 @@ export const Item = ({setPage, pagesCnt}) => {
 
   const handleClick = () => {
     api
-      .deleteProduct(params.itemID)
+      .deletePost(params.itemID)
       .then((data) => {
-        console.log(data);
         navigate("/all_posts");
       })
       .catch((err) => alert(err));
   };
 
   const navigateToEditPage = () => {
-    navigate(`edit`);
+    navigate(`/edit`);
   };
 
   useEffect(() => {
@@ -41,16 +41,18 @@ export const Item = ({setPage, pagesCnt}) => {
     <div className="sectionInner">
       {item && (
         <>
-        <HeaderLine setPage={setPage} pagesCnt={pagesCnt}/>
 
+        <HeaderLine setPage={setPage} pagesCnt={pagesCnt}/>
         <Grid container spacing={2}>
+        {localStorage.getItem('userID')===item.author._id ?
+        <>
           <Grid item xs={6}>
             <Button
               onClick={navigateToEditPage}
               variant="contained"
               color="warning"
               size="small"
-            >
+              >
               Редактировать пост
             </Button>
           </Grid>
@@ -60,10 +62,12 @@ export const Item = ({setPage, pagesCnt}) => {
               variant="contained"
               color="primary"
               size="small"
-            >
+              >
               Удалить пост
             </Button>
           </Grid>
+                </>
+              : null}
           <Grid item container xs={6}>
             <Grid item xs={12}>
               <img

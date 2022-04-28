@@ -63,7 +63,7 @@ export default function HeaderBtns({ isLogin, setLogin, user }) {
             </IconButton>
           </Tooltip>
         ) : (
-          <LinkRoute to={'all_posts'}>
+          <LinkRoute to={'/all_posts'}>
           <IconButton aria-label="Login" onClick={loginFunc}>
             <LoginIcon />
           </IconButton>
