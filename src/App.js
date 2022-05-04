@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { Routes, Route, Link } from 'react-router-dom';
-
+import {
+  Navigate  
+} from "react-router-dom";
 import { Footer } from "./components/Footer";
 import { Header } from "./components/Header";
 import Logo  from "./components/Logo";
@@ -75,11 +77,17 @@ useEffect(() => {
       <Route
       path='/'
       element={
+        <>
+        {localStorage.getItem('token') === '' ||  localStorage.getItem('token') === null ? 
           <div className='content__cards'>
               <Typography>Авторизируйтесь (кнопка сверху справа)
                 PS: авторизация пока фейковая
               </Typography>
-          </div>
+          </div> 
+          :
+          <Navigate to="/all_posts" />
+          }
+        </>
       } />
       <Route path='/all_posts' element={
         <LoginContent list={postsState} setPostsState={setPostsState} pagesCnt={pagesCnt} setPagesCnt={setPagesCnt} login={login} favorite={favorite} setFavorite={setFavorite} user={user} setUpdateAfterDelete={setUpdateAfterDelete}/>
