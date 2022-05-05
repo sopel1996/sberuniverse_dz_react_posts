@@ -26,7 +26,7 @@ function App() {
   const [postsState, setPostsState] = useState([]);
   const [pagesCnt, setPagesCnt] = useState(1);
   const [login, setLogin] = useState(
-    localStorage.getItem("token") === "" ? false : true
+    localStorage.getItem("token") === "" || localStorage.getItem("token") === null ? false : true
   );
   const [updateAfterDelete, setUpdateAfterDelete] = useState(false);
   const [user, setUser] = useState(null);
@@ -57,6 +57,8 @@ function App() {
   };
 
   const signUp = () => {
+    console.log('signUp');
+
     api
       .signUp({ email, password })
       .then((createdUser) => {
@@ -70,6 +72,7 @@ function App() {
   };
 
   const signIn = () => {
+    console.log('signIn');
     api
       .signIn({ email, password })
       .then((data) => {
